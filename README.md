@@ -28,6 +28,10 @@ python rag.py ingest              # build the local index from documents/
 python rag.py ask "some question" # retrieve + generate an answer
 ```
 
+## AI disclosure (EU AI Act Article 50)
+
+Every answer opens with "I'm an AI assistant for Orbitly." Each `ask` run is a conversation of its own, so the line appears once per reply, before the answer. The text is set with the `AI_DISCLOSURE` environment variable (`{business}` is filled from `BUSINESS_NAME`); leaving it blank keeps the default. It is only switched off when `AI_DISCLOSURE_REMOVED_BY_WRITTEN_REQUEST` records the client's written request (date and who asked). Checked by offline tests (no model or key needed): `pip install numpy pytest && pytest`.
+
 ## Stack
 
 Python · sentence-transformers (local embeddings) · NumPy · Anthropic Claude API
