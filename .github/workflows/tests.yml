@@ -1,0 +1,19 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # The embedding model is stubbed in the tests, so sentence-transformers (and its model download) is not installed here.
+      - name: Install test dependencies
+        run: pip install 'anthropic<3' numpy pytest
+      - name: Run tests (no API key or account needed)
+        run: pytest -v
